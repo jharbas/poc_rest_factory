@@ -1,4 +1,4 @@
-# xy-inc
+# poc
 
 # Instalação:
  1. clone este repositório ``
