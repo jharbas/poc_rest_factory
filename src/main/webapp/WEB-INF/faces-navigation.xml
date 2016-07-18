@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE faces-config PUBLIC
+    "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+    "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+    
+<faces-config>
+	<navigation-rule>
+		<description>Todas</description>
+		<from-view-id>*</from-view-id>
+		
+		<navigation-case>
+			<from-outcome>popup-msg</from-outcome>
+			<to-view-id>/pages/popup_msg.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/pages/index.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>modelo</from-outcome>
+			<to-view-id>/pages/modelo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+	
+	</navigation-rule>
+</faces-config>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="content">
+
+		<div class="row">
+			<div class="col-xs-12">
+				<ol class="breadcrumb">
+					<li><p:commandLink actionListener="#{menuBBean.goToHome()}">Home</p:commandLink></li>
+					<li><p:commandLink actionListener="#{menuBBean.goToModelo()}">Modelo</p:commandLink></li>
+					<li class="active">Cadastro de Modelo</li>
+				</ol>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<h1 class="title-page">Inclusão de Modelo</h1>
+				<hr />
+			</div>
+		</div>
+
+		<div id="panelFilterArea" class="filtro-tabela h-1600">
+			<h:form id="frm-incluir-modelo">
+
+				<div class="row">
+					<div class="col-xs-6">
+						<h:outputLabel for="lb-modelo-inc">Label do Modelo</h:outputLabel>
+						<p:inputText id="lb-modelo-inc" maxlength="20"
+							styleClass="form-control"
+							value="#{modeloBBean.dtoManutencao.label}"
+							disabled="#{modeloBBean.indDetalhar}" />
+					</div>
+					<div class="col-xs-6">
+						<h:outputLabel for="nm-modelo-inc">Nome do Modelo</h:outputLabel>
+						<p:inputText id="nm-modelo-inc" maxlength="20"
+							styleClass="form-control"
+							value="#{modeloBBean.dtoManutencao.nome}"
+							placeholder="Sem Espaços" disabled="#{modeloBBean.indDetalhar}" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<p:fieldset legend="Atributos">
+							<p:outputPanel autoUpdate="true">
+								<div class="row">
+									<div class="col-xs-4">
+										<h:outputLabel for="lb-atributo-inc">Label do Atributo</h:outputLabel>
+										<p:inputText id="lb-atributo-inc" maxlength="20"
+											styleClass="form-control form-control-fieldset"
+											value="#{modeloBBean.dtoAtributo.label}"
+											disabled="#{modeloBBean.indDetalhar}" />
+									</div>
+									<div class="col-xs-4">
+										<h:outputLabel for="nm-atributo-inc">Nome do Atributo</h:outputLabel>
+										<p:inputText id="nm-atributo-inc" maxlength="20"
+											styleClass="form-control form-control-fieldset"
+											value="#{modeloBBean.dtoAtributo.nome}"
+											placeholder="Sem Espaços"
+											disabled="#{modeloBBean.indDetalhar}" />
+									</div>
+									<div class="col-xs-4">
+										<h:outputLabel>Obrigatório?</h:outputLabel>
+										<br />
+										<div class="table-responsive">
+											<h:selectOneRadio id="customRadio" layout="custom"
+												styleClass="radio-custon"
+												value="#{modeloBBean.dtoAtributo.indObrigatorio}"
+												disabled="#{modeloBBean.indDetalhar}">
+												<f:selectItem itemLabel="Sim" itemValue="S" />
+												<f:selectItem itemLabel="Não" itemValue="N" />
+											</h:selectOneRadio>
+										</div>
+									</div>
+								</div>
+								<div class="row row-fieldset">
+									<div class="col-xs-6">
+										<h:outputLabel>Tipo Atributo</h:outputLabel>
+										<p:selectOneMenu value="#{modeloBBean.dtoAtributo.tipo}"
+											styleClass="form-control"
+											disabled="#{modeloBBean.indDetalhar}">
+											<f:selectItem itemValue="" itemLabel="Selecione"
+												noSelectionOption="true" />
+											<f:selectItems value="#{modeloBBean.listaTipos}" var="tipo"
+												itemLabel="#{tipo.nome}" itemValue="#{tipo}" />
+										</p:selectOneMenu>
+									</div>
+									<div class="col-xs-3">
+										<h:outputLabel for="nm-atributo-inc">Qtd. Caracteres</h:outputLabel>
+										<p:inputText styleClass="form-control form-control-fieldset"
+											value="#{modeloBBean.dtoAtributo.precisao}" type="number"
+											maxlength="3" disabled="#{modeloBBean.indDetalhar}" />
+									</div>
+									<div class="col-xs-3">
+										<h:outputLabel for="nm-atributo-inc">Casas Decimais</h:outputLabel>
+										<p:inputText maxlength="2" id="inp-escala"
+											styleClass="form-control form-control-fieldset"
+											value="#{modeloBBean.dtoAtributo.escala}" type="number"
+											disabled="#{modeloBBean.indDetalhar}" />
+									</div>
+								</div>
+								<div class="row row-fieldset">
+									<hr class="hr-fieldset" />
+									<div class="col-xs-12 text-right">
+										<p:commandLink styleClass="btn btn-secundario"
+											actionListener="#{modeloBBean.limparAtributo}"
+											rendered="#{!modeloBBean.indDetalhar}">Limpar</p:commandLink>
+										<p:commandLink styleClass="btn btn-secundario"
+											actionListener="#{modeloBBean.salvarAtributo}"
+											rendered="#{!modeloBBean.indDetalhar}">Incluir</p:commandLink>
+									</div>
+								</div>
+							</p:outputPanel>
+							<div class="row row-fieldset">
+								<div class="col-xs-12">
+									<p:dataTable value="#{modeloBBean.dtoManutencao.atributos}"
+										var="atributo" id="id_table_atributo"
+										styleClass="tabela-scroll" rowKey="#{atributo.id}" rows="5"
+										paginator="true" paginatorPosition="bottom"
+										emptyMessage="Nenhum registro encontrado."
+										paginatorAlwaysVisible="false"
+										paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="Label" />
+											</f:facet>
+											<h:outputText value="#{atributo.label}" />
+										</p:column>
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="Nome" />
+											</f:facet>
+											<h:outputText value="#{atributo.nome}" />
+										</p:column>
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="Obrigatório?" />
+											</f:facet>
+											<h:outputText value="Sim"
+												rendered="#{atributo.indObrigatorio eq 'S'}" />
+											<h:outputText value="Não"
+												rendered="#{atributo.indObrigatorio eq 'N'}" />
+										</p:column>
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="Tipo" />
+											</f:facet>
+											<h:outputText value="#{atributo.tipo.nome}" />
+										</p:column>
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="Qtd. Carac." />
+											</f:facet>
+											<h:outputText value="#{atributo.precisao}" />
+										</p:column>
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="Qtd. Decim." />
+											</f:facet>
+											<h:outputText value="#{atributo.escala}" />
+										</p:column>
+										<p:column style="width:6%;text-align:right;"
+											exportable="false">
+											<p:commandLink styleClass="btn btn-secundario nopaddin"
+												actionListener="#{modeloBBean.editarAtributo(atributo)}"
+												rendered="#{(atributo.indPk ne 'S') and (!modeloBBean.indDetalhar)}">
+												<img class="table-icon-2" src="/images/btnEditar.png" />
+											</p:commandLink>
+										</p:column>
+										<p:column style="width:6%;text-align:right;"
+											exportable="false">
+											<p:commandLink styleClass="btn btn-secundario nopaddin"
+												actionListener="#{modeloBBean.excluirAtributo(atributo)}"
+												rendered="#(atributo.indPk ne 'S') and (!modeloBBean.indDetalhar)}">
+												<img class="table-icon-2" src="/images/btnExcluir.png" />
+											</p:commandLink>
+										</p:column>
+
+									</p:dataTable>
+
+								</div>
+							</div>
+						</p:fieldset>
+					</div>
+				</div>
+				<div class="row div-button-footer">
+					<div class="col-xs-12 text-right">
+						<p:commandLink styleClass="btn btn-default"
+							actionListener="#{menuBBean.goToModelo}">Cancelar</p:commandLink>
+						<p:commandLink styleClass="btn btn-default"
+							actionListener="#{modeloBBean.salvarModelo}"
+							rendered="#{!modeloBBean.indDetalhar}">Salvar Modelo</p:commandLink>
+					</div>
+				</div>
+
+
+			</h:form>
+		</div>
+
+	</ui:define>
+
+</ui:composition>

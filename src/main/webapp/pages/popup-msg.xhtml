@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html" encoding="ISO-8859-1">
+	<h:head>
+		<link type="text/css" rel="stylesheet" href="/css/poc.css" />
+		<title>Poc</title>
+	</h:head>
+	<body class="body-popup">
+		<h:form id="frmPopup">
+			<div>
+				<div style="padding-bottom: 25px; padding-top: 10px">
+					<div style="text-align: center;">
+						<p:outputLabel value="#{popupBBean.mensagem}" />
+					</div>
+				</div>
+				<div style="text-align: center;">
+					<p:commandButton id="btnOk" value="OK"
+						actionListener="#{popupBBean.close}" styleClass="btn btn-default" />	
+				</div>
+			</div>
+		</h:form>
+	</body>
+</f:view>
+</html>

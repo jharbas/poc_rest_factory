@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+          http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.faces</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	<context-param>
+		<param-name>primefaces.CLIENT_SIDE_VALIDATION</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
+	<context-param>
+    <description>
+            Context initialization parameter name for a comma delimited
+            list of context-relative resource paths (in addition to
+            /WEB-INF/faces-config.xml which is loaded automatically if
+            it exists) containing JavaServer Faces configuration
+            information.
+        </description>
+    <param-name>javax.faces.CONFIG_FILES</param-name>
+    <param-value>
+            /WEB-INF/faces-config.xml, /WEB-INF/faces-navigation.xml
+        </param-value>
+  </context-param>
+  <context-param>
+    <description>
+            Set this flag to true, if you want the JavaServer Faces
+            Reference Implementation to validate the XML in your
+            faces-config.xml resources against the DTD. Default value is
+            false.
+        </description>
+    <param-name>org.apache.myfaces.VALIDATE_XML</param-name>
+    <param-value>false</param-value>
+  </context-param>
+  <context-param>
+    <description>
+            Set this flag to true, if you want the JavaServer Faces
+            Reference Implementation to verify that all of the
+            application objects you have configured (components,
+            converters, renderers, and validators) can be successfully
+            created. Default value is false.
+        </description>
+    <param-name>org.apache.myfaces.VALIDATE</param-name>
+    <param-value>true</param-value>
+  </context-param>
+</web-app>

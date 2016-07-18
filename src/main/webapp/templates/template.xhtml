@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html" encoding="ISO-8859-1">
+	<h:head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="author" content="Jharbas" />
+
+		<link type="text/css" rel="stylesheet" href="/css/bootstrap.css" />
+		<link type="text/css" rel="stylesheet" href="/css/poc.css" />
+
+		<title>Poc BackEnd</title>
+	</h:head>
+	<h:body>
+		<section class="topo">
+			<div class="container">
+				<div class="row">
+					<h3>POC BackEnd</h3>
+				</div>
+			</div>
+		</section>
+
+		<section class="meio">
+			<div class="container">
+				<div class="row">
+					<!--menu lateral-->
+					<div class="col-xs-3">
+						<h:form id="formMenu">
+							<section class="menu-lateral">
+								<ul>
+									<li class="agrupador-menu-lat categoria1">Parametrização<i
+										class="fa fa-chevron-right" /></li>
+									<li class="links">
+										<ul>
+											<li><p:commandLink actionListener="#{menuBBean.goToModelo()}">Modelo</p:commandLink></li>
+										</ul>
+									</li>
+								</ul>
+							</section>
+						</h:form>
+					</div>
+					<div class="col-xs-9 content">
+						<ui:insert name="content" />
+					</div>
+				</div>
+			</div>
+		</section>
+	</h:body>
+</f:view>
+</html>

@@ -1,0 +1,91 @@
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="content">
+
+		<div class="row">
+			<div class="col-xs-12">
+				<ol class="breadcrumb">
+					<li><p:commandLink actionListener="#{menuBBean.goToHome()}">Home</p:commandLink></li>
+					<li class="active">Modelo</li>
+				</ol>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<h1 class="title-page">Pesquisa de Modelo</h1>
+				<hr />
+			</div>
+		</div>
+
+		<p:outputPanel id="panelFilterArea" styleClass="filtro-tabela"
+			autoUpdate="true">
+			<h:form id="frm-filtro-modelo">
+				<div class="row">
+					<div class="col-xs-4">
+						<h:outputLabel for="lb-modelo">Label do Modelo</h:outputLabel>
+						<p:inputText id="lb-modelo" maxlength="20"
+							styleClass="form-control" value="#{modeloBBean.dtoFiltro.label}" />
+					</div>
+					<div class="col-xs-4">
+						<h:outputLabel for="nm-modelo">Nome do Modelo</h:outputLabel>
+						<p:inputText id="nm-modelo" maxlength="20"
+							styleClass="form-control" value="#{modeloBBean.dtoFiltro.nome}" />
+					</div>
+				</div>
+
+				<div class="row">
+					<hr />
+					<div class="col-xs-12 text-right">
+						<p:commandLink styleClass="btn btn-default"
+							actionListener="#{modeloBBean.goIncluir}">Incluir Modelo</p:commandLink>
+						<p:commandLink styleClass="btn btn-default"
+							actionListener="#{modeloBBean.pesquisar}">Pesquisar</p:commandLink>
+					</div>
+				</div>
+			</h:form>
+		</p:outputPanel>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<p:dataTable value="#{modeloBBean.listaModelo}" var="modelo"
+					id="id_table_modelo" styleClass="tabela-scroll"
+					rowKey="#{modelo.id}" rows="10" paginator="true"
+					paginatorPosition="bottom" rendered="#{modeloBBean.isShowResult()}"
+					emptyMessage="Nenhum registro encontrado."
+					paginatorAlwaysVisible="false"
+					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Label" />
+						</f:facet>
+						<h:outputText value="#{modelo.label}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Nome" />
+						</f:facet>
+						<h:outputText value="#{modelo.nome}" />
+					</p:column>
+
+					<p:column style="width:18%;text-align:right;" exportable="false">
+						<p:commandLink styleClass="btn btn-secundario"
+							actionListener="#{modeloBBean.goDetalhar(modelo)}">
+							<img class="table-icon" src="/images/btnLupa.png" />
+						</p:commandLink>
+					</p:column>
+
+				</p:dataTable>
+
+			</div>
+		</div>
+
+
+	</ui:define>
+
+</ui:composition>
